@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "application",
+      "type": "com.github.jobjava00.microservicea.configuration.ApplicationConfiguration",
+      "sourceType": "com.github.jobjava00.microservicea.configuration.ApplicationConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "application.message",
+      "type": "java.lang.String",
+      "sourceType": "com.github.jobjava00.microservicea.configuration.ApplicationConfiguration"
+    }
+  ],
+  "hints": []
+}
