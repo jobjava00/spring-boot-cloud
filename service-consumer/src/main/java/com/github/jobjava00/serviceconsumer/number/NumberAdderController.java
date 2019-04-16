@@ -12,15 +12,18 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @Slf4j
 public class NumberAdderController {
-	@Value("${number.service.url}")
-	private String numberServiceUrl;
+	private final RandomServiceProxy randomServiceProxy;
+	private final String numberServiceUrl;
+
+	public NumberAdderController(RandomServiceProxy randomServiceProxy, @Value("${number.service.url}") String numberServiceUrl) {
+		this.randomServiceProxy = randomServiceProxy;
+		this.numberServiceUrl = numberServiceUrl;
+	}
 
 	@RequestMapping("/add")
 	public Long add(){
 		long sum = 0;
-		var responseEntity = new RestTemplate().getForEntity(numberServiceUrl, Integer[].class);
-		var numbers = responseEntity.getBody();
-
+		var numbers = randomServiceProxy.getRandomNumbers();
 		for(int number : numbers){
 			sum += number;
 		}
