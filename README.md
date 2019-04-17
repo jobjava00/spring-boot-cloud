@@ -17,6 +17,19 @@
 * client side 의 로드밸런서
 * 전통적인 로드밸런서는 하드웨어가 필요하나 립본은 하드웨어 없이 소프트웨어로 로드밸런서 구현 가능
 
+### eureka
+
+* 서비스 검색을 위한 네임서버
+* eureka 대시보드
+    * <http://localhost:8761/>
+* java11 에서 추가 필요
+
+```groovy
+compile 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+compile 'com.sun.xml.bind:jaxb-impl:2.3.1'
+compile 'javax.xml.bind:jaxb-api:2.3.1'
+```
+
 ## microservice-a
 
 * 부트스트랩에 컨피그 서버를 사용하기 위해 application.properties -> bootstrap.properties 로 변경
