@@ -9,9 +9,9 @@ import java.util.List;
 /**
  * @author jobjava00
  */
-@FeignClient(name = "microservice-a")
+@FeignClient(name = "zuul-api-gateway")
 @RibbonClient(name = "microservice-a")
 public interface RandomServiceProxy {
-	@GetMapping(value = "/random")
+	@GetMapping(value = "/microservice-a/random")
 	List<Integer> getRandomNumbers();
 }

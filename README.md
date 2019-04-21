@@ -20,6 +20,8 @@
 ### eureka
 
 * 서비스 검색을 위한 네임서버
+    * eureka 등록이 필요한 client 에서 eureka-client Dependency 필요
+        * implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 * eureka 대시보드
     * <http://localhost:8761/>
 * java11 에서 추가 필요
@@ -43,13 +45,13 @@ compile 'javax.xml.bind:jaxb-api:2.3.1'
 
 * <https://t2t2tt.tistory.com/27>
 
-### actuator 의존성 포함 시켜야 refresh URL 호출 가능
+#### actuator 의존성 포함 시켜야 refresh URL 호출 가능
 
 ```groovy
 implementation 'org.springframework.boot:spring-boot-starter-actuator'
 ```
 
-### 설정 갱신
+#### 설정 갱신
 
 * 해당 서버만 갱신
 
@@ -60,4 +62,32 @@ curl -X POST http://localhost:8080/actuator/refresh
 * 모든 서버 갱신
 ```bash
 curl -X POST http://localhost:8080/actuator/bus-refresh
+```
+
+### Zuul
+
+* JVM 기반의 라우터이자 로드 밸런서
+* 사용처
+    * 인증과 보안
+    * 모니터링과 분석
+    * 동적 라우팅
+    * 트래픽 조정
+* eureka 등록
+
+```bash
+implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+@EnableDiscoveryClient
+public class ZuulApiGatewayServerApplication {
+```
+
+service-consumer 변경
+
+```java
+@FeignClient(name = "zuul-api-gateway")
+@RibbonClient(name = "microservice-a")
+public interface RandomServiceProxy {
+	@GetMapping(value = "/microservice-a/random")
+	List<Integer> getRandomNumbers();
+}
 ```
