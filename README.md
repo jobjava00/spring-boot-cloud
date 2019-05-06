@@ -91,3 +91,23 @@ public interface RandomServiceProxy {
 	List<Integer> getRandomNumbers();
 }
 ```
+
+### sleuth - 슬루스
+
+* 아래 프로젝트에 의존성 추가
+    * microservice-a
+    * service-consumer
+    * zuul-api-gateway-server
+
+```bash
+compile group: 'org.springframework.cloud', name: 'spring-cloud-sleuth-zipkin', version: '2.1.1.RELEASE'
+```
+
+#### AlwaysSampler Bean 등록
+
+```java
+@Bean
+public AlwaysSampler defaultSampler(){
+	return new AlwaysSampler();
+}
+```
